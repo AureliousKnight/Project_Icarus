@@ -3,18 +3,14 @@ import numpy as np
 
 class MagneticFieldSimulation(Scene):
     def construct(self):
-        # 1. Elegant Title
+        
         title = Text("Electromagnetic Vector Field", font="Consolas", color=BLUE_A).scale(0.6)
         title.to_edge(UP)
-
-        # 2. FIXED MATH: Correctly pull individual index coordinates out of the 3D point array
         def vortex_math(point):
-            x = point[0]  # First element (X coordinate)
-            y = point[1]  # Second element (Y coordinate)
+            x = point[0]
+            y = point[1]
             denominator = (x**2 + y**2 + 0.1)**0.5
             return np.array([-y / denominator, x / denominator, 0])
-
-        # 3. Create the Visual 
         field = ArrowVectorField(
             vortex_math,
             x_range=[-4, 4, 0.5],
